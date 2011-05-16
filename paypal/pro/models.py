@@ -28,6 +28,7 @@ class PayPalNVP(Model):
     correlationid = models.CharField(max_length=32, blank=True) # 25b380cda7a21
     token = models.CharField(max_length=64, blank=True)
     payerid = models.CharField(max_length=64, blank=True)
+    transactionid = models.CharField(blank=True, max_length=255)
     
     # Transaction Fields
     firstname = models.CharField("First Name", max_length=255, blank=True)

@@ -107,6 +107,18 @@ class PayPalWPP(object):
         payment_was_successful.send(params)
         return nvp_obj
         
+    def doReferenceTransaction(self, params):
+        """
+        Check out using a previous transaction (used for one-click)
+        """
+        defaults = {"method": "DoReferenceTransaction", "paymentaction": "Sale"}
+        required = L("returnurl cancelurl amt token referenceid")
+        nvp_obj = self._fetch(params, required, defaults)
+        if nvp_obj.flag:
+            raise PayPalFailure(nvp_obj.flag_info)
+        payment_was_successful.send(params)
+        return nvp_obj
+        
     def createRecurringPaymentsProfile(self, params, direct=False):
         """
         Set direct to True to indicate that this is being called as a directPayment.
