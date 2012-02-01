@@ -94,6 +94,7 @@ class CreditCardCVV2Field(forms.CharField):
 
 # Country Field from:
 # http://www.iso.org/iso/country_codes/iso_3166_code_lists/country_names_and_code_elements.htm
+# From revision on 2011‑11‑08 
 COUNTRIES = (
     ('US', _('United States')),
     ('CA', _('Canada')),
