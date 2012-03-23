@@ -285,7 +285,7 @@ class PayPalStandardBase(Model):
             if self.flag:
                 payment_was_flagged.send(sender=self)
             else:
-                payment_was_successful.send(sender=self)
+                payment_was_successful.send(sender=self, request=self.request)
         # Subscription signals:
         else:
             if self.is_subscription_cancellation():
@@ -302,6 +302,7 @@ class PayPalStandardBase(Model):
         """Store the data we'll need to make the postback from the request object."""
         self.query = getattr(request, request.method).urlencode()
         self.ipaddress = request.META.get('REMOTE_ADDR', '')
+        self.request = request
 
     def _postback(self):
         """Perform postback to PayPal and store the response in self.response."""
