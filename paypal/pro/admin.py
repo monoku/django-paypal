@@ -9,4 +9,5 @@ class PayPalNVPAdmin(admin.ModelAdmin):
     list_display = ('user', 'ipaddress', 'method', 'flag', 'flag_code', 'created_at')
     list_filter = ('flag', 'created_at')
     search_fields = ('user__email', 'ipaddress', 'flag', 'firstname', 'lastname', 'transactionid')
+    readonly_fields = ('user',)
 admin.site.register(PayPalNVP, PayPalNVPAdmin)
