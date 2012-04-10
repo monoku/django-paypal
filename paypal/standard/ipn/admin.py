@@ -63,7 +63,7 @@ class PayPalIPNAdmin(admin.ModelAdmin):
         "__unicode__", "flag", "flag_info", "invoice", "custom", 
         "payment_status", "created_at"
     ]
-    search_fields = ["txn_id", "recurring_payment_id"]
+    search_fields = ["txn_id", "recurring_payment_id", "first_name", "last_name", "payer_email", "ipaddress"]
 
 
 admin.site.register(PayPalIPN, PayPalIPNAdmin)
