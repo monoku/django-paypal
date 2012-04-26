@@ -160,6 +160,13 @@ class PayPalWPP(object):
         if nvp_obj.flag:
             raise PayPalFailure(nvp_obj.flag_info)
         return nvp_obj
+    
+    def getTransactionDetailsResponse(self, params):
+        defaults = {"method": "GetTransactionDetails"}
+        required = L("transactionid")
+        
+        response = self._fetchresponse(params, required, defaults)
+        return response
 
     def massPay(self, params):
         raise NotImplementedError
@@ -227,6 +234,14 @@ class PayPalWPP(object):
                 del params[k]
                 
         return params
+    
+    def _fetchresponse(self, params, required, defaults):
+        """Make the NVP request and store the response."""
+        defaults.update(params)
+        pp_params = self._check_and_update_params(required, defaults)
+        pp_string = self.signature + urlencode(pp_params)
+        response = self._request(pp_string)
+        return response
 
     def _fetch(self, params, required, defaults):
         """Make the NVP request and store the response."""
