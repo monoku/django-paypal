@@ -40,8 +40,8 @@ class PayPalNVP(Model):
     zip = models.CharField("Postal / Zip Code", max_length=32, blank=True)
     
     # Custom fields
-    invnum = models.CharField(max_length=255, blank=True)
-    custom = models.CharField(max_length=255, blank=True) 
+    invnum = models.CharField(max_length=255, blank=True, db_index=True)
+    custom = models.CharField(max_length=255, blank=True, db_index=True) 
     
     # Admin fields
     user = models.ForeignKey(User, blank=True, null=True)
