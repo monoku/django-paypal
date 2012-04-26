@@ -69,7 +69,7 @@ class PayPalWPP(object):
         nvp_obj = self._fetch(params, required, defaults)
         if nvp_obj.flag:
             raise PayPalFailure(nvp_obj.flag_info)
-        payment_was_successful.send(params)
+        payment_was_successful.send(params, request=self.request)
         # @@@ Could check cvv2match / avscode are both 'X' or '0'
         # qd = django.http.QueryDict(nvp_obj.response)
         # if qd.get('cvv2match') not in ['X', '0']:
@@ -104,7 +104,7 @@ class PayPalWPP(object):
         nvp_obj = self._fetch(params, required, defaults)
         if nvp_obj.flag:
             raise PayPalFailure(nvp_obj.flag_info)
-        payment_was_successful.send(params)
+        payment_was_successful.send(params, request=self.request)
         return nvp_obj
         
     def doReferenceTransaction(self, params):
@@ -116,7 +116,7 @@ class PayPalWPP(object):
         nvp_obj = self._fetch(params, required, defaults)
         if nvp_obj.flag:
             raise PayPalFailure(nvp_obj.flag_info)
-        payment_was_successful.send(params)
+        payment_was_successful.send(params, request=self.request)
         return nvp_obj
         
     def createRecurringPaymentsProfile(self, params, direct=False):

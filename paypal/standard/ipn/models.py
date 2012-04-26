@@ -28,7 +28,7 @@ class PayPalIPN(PayPalStandardBase):
             if self.flag:
                 payment_was_flagged.send(sender=self)
             else:
-                payment_was_successful.send(sender=self)
+                payment_was_successful.send(sender=self, request=self.request)
         # Recurring payment signals:
         # XXX: Should these be merged with subscriptions?
         elif self.is_recurring():
